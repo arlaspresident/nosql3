@@ -29,4 +29,4 @@ const experienceSchema = new mongoose.Schema({
 });
 
 // exportera modellen
-module.exports = mongoose.model('Experience', experienceSchema);
+module.exports = mongoose.model('experience', experienceSchema);

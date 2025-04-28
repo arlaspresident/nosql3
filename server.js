@@ -17,13 +17,14 @@ app.use(express.json());
 // använda api-rutterna för experiences
 app.use('/api/experiences', experienceRoutes);
 
-// anslut till mongodb
+// anslut till mongodb och starta servern först när kopplingen är klar
 mongoose.connect(process.env.MONGO_URI)
-
-.then(() => console.log('ansluten till mongodb'))
-.catch((err) => console.error('fel vid anslutning till mongodb:', err));
-
-// starta servern
-app.listen(PORT, () => {
-  console.log(`servern körs på http://localhost:${PORT}`);
-});
+  .then(() => {
+    console.log('ansluten till mongodb');
+    app.listen(PORT, () => {
+      console.log(`servern körs på http://localhost:${PORT}`);
+    });
+  })
+  .catch(err => {
+    console.error('fel vid anslutning till mongodb:', err);
+  });
